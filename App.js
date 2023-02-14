@@ -11,16 +11,17 @@ import { Lato_400Regular, useFonts as UseLato } from "@expo-google-fonts/lato";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import "react-native-gesture-handler";
-import { AppNavigator } from "./src/infrastructure/navigation/app.navigator";
-import { firebase } from "./firebaseConfig";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
-import {Navigation} from './src/infrastructure/navigation/index'
+import { Navigation } from "./src/infrastructure/navigation/index";
+
+
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-
-
 
   let [OswaldLoaded] = UseOswald({
     Oswald_400Regular,
@@ -33,18 +34,11 @@ export default function App() {
     return null;
   }
 
-
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AuthenticationContextProvider>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+      <AuthenticationContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>
         <ExpoStatusBar style="auto" />
       </ThemeProvider>

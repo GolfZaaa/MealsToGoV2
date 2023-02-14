@@ -5,12 +5,14 @@ import {
   AccountContainer,
   AccountCover,
   AuthButton,
+  Title,
 } from "../components/account.styles";
 
 export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
+      <Title>Golf Shop</Title>
       <AccountContainer>
         <AuthButton
          icon="email"
