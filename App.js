@@ -14,27 +14,13 @@ import "react-native-gesture-handler";
 import { AppNavigator } from "./src/infrastructure/navigation/app.navigator";
 import { firebase } from "./firebaseConfig";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import {Navigation} from './src/infrastructure/navigation/index'
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
- React.useEffect(() => {
-  setTimeout(() =>{
-    firebase.auth
-    .signInWithEmailAndPassword(
-      firebase.getAuth,
-      "golf_1234_ag@hotmail.com",
-      "123456"
-    )
-    .then((user) => {
-      setIsAuthenticated(true);
-    })
-    .catch((error) => {
-      setIsAuthenticated(false);
-      console.log(error);
-    });
-  },2000);
- },[]);
+
 
   let [OswaldLoaded] = UseOswald({
     Oswald_400Regular,
@@ -47,18 +33,19 @@ export default function App() {
     return null;
   }
 
-  if (!isAuthenticated) return null;
 
   return (
     <>
       <ThemeProvider theme={theme}>
+        <AuthenticationContextProvider>
         <FavouritesContextProvider>
           <LocationContextProvider>
             <RestaurantsContextProvider>
-              <AppNavigator />
+              <Navigation />
             </RestaurantsContextProvider>
           </LocationContextProvider>
         </FavouritesContextProvider>
+        </AuthenticationContextProvider>
         <ExpoStatusBar style="auto" />
       </ThemeProvider>
     </>
