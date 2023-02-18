@@ -10,6 +10,7 @@ import { Search } from "../components/search.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { RestaurantList } from "../components/restaurant-list.styles";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
@@ -66,7 +67,9 @@ export const RestaurantsScreen = ({ navigation }) => {
                 }
               >
                 <Spacer position="bottom" size="large">
+                <FadeInView>
                   <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
                 </Spacer>
               </TouchableOpacity>
             );
